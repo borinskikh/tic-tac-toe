@@ -1,14 +1,12 @@
 import PySimpleGUI as sg
 
 sg.theme('DarkAmber')
-
 array = [
     [' ', '1', '2', '3'],
     ['1', ' ', ' ', ' '],
     ['2', ' ', ' ', ' '],
     ['3', ' ', ' ', ' '],
 ]
-
 layout = [
     [sg.Text("Player 1's turn\n", key='-TURN-')],
     [sg.Text(array[0][col], key=f'-CELL-0{col}-',
@@ -21,14 +19,10 @@ layout = [
              size=(3, 3)) for col in range(4)],
     [sg.Input(size=(5, 5), key='-INPUT-'), sg.Button('OK', key='-BUTTON-')]
 ]
-
 window = sg.Window('tic-tac-toe', layout)
-
 playerNumber = 1
-
 playerSymbol = ['', 'x', 'o']
-
-sg.popup('Enter coordinates separated by space to make a move')
+sg.popup('Enter coordinates separated by a space to make a move')
 
 
 def checkForEnd():
@@ -65,6 +59,7 @@ while True:
         window[cell].update(playerSymbol[playerNumber])
         if checkForEnd():
             sg.popup('Match is over')
+            break
         playerNumber = 2 if playerNumber == 1 else 1
         window['-TURN-'].update("Player " + str(playerNumber) + "'s turn")
     window['-INPUT-'].update('')
